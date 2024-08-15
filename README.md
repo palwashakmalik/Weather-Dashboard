@@ -80,11 +80,12 @@ The project follows a standard React and Next.js structure:
 - `services/`: Contains service functions for API interactions.
 - `styles/`: Contains global and component-specific styles.
 - `context/`: Contains the context provider and hooks for managing the state of favorite cities.
+- `api/weather`: Contains api route for weather.
 
 ### Key Components
 
 - **`CityWeatherCard.tsx`**: A component that displays weather information for a specific city. This component includes the functionality to add or remove a city from favorites.
-- **`Home.tsx`**: The main page component that integrates the search functionality, displays default cities, and lists favorite cities.
+- **`page.tsx`**: The main page component that integrates the search functionality, displays default cities, and lists favorite cities.
 
 ### Context Management
 
