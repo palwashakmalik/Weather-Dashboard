@@ -39,8 +39,13 @@ export default async function handler(
     });
 
     res.status(200).json(response.data);
-  } catch (error: any) {
-    console.error('Error fetching weather data:', error.message);
-    res.status(500).json({ error: 'Failed to fetch weather data' });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('Error fetching weather data:', error.message);
+      res.status(500).json({ error: 'Failed to fetch weather data' });
+    } else {
+      console.error('Unexpected error:', error);
+      res.status(500).json({ error: 'Unexpected error occurred' });
+    }
   }
 }

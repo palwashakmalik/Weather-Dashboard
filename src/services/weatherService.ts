@@ -23,8 +23,12 @@ export const getWeatherData = async (city: string): Promise<WeatherData> => {
       },
     });
     return response.data;
-  } catch (error: any) {
-    console.error('Error fetching weather data:', error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('Error fetching weather data:', error.message);
+    } else {
+      console.error('Unexpected error:', error);
+    }
     throw new Error('Failed to fetch weather data');
   }
 };
