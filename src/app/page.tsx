@@ -85,7 +85,7 @@ const Home: React.FC = () => {
           <input
             type="text"
             placeholder="Search for a city"
-            className="flex-grow p-2 border border-gray-300 rounded-l text-black"
+            className="flex-grow p-2 border border-gray-300 text-black"
             value={searchQuery}
             onChange={handleInputChange}
           />
