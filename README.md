@@ -52,7 +52,7 @@ Set up the environment variables by following these steps:
    touch .env
    ```
 
-2. **Open the `.env`  file and add the following variables or see .env.example for example:**
+2. **Open the `.env` file and add the following variables or see .env.example for example:**
 
    ```env
    OPENWEATHERMAP_API_KEY=your_openweathermap_api_key

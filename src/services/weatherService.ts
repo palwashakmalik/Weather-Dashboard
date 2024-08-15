@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = process.env.OPENWEATHER_MAP_API_KEY;
-const BASE_URL = process.env.BASE_URL;
-
-interface WeatherData {
+export interface WeatherData {
   name: string;
   main: {
     temp: number;
@@ -20,16 +17,14 @@ interface WeatherData {
 
 export const getWeatherData = async (city: string): Promise<WeatherData> => {
   try {
-    const response = await axios.get(BASE_URL, {
+    const response = await axios.get(`/api/weather`, {
       params: {
-        q: city,
-        appid: API_KEY,
-        units: 'metric',
+        city,
       },
     });
     return response.data;
-  } catch (error) {
-    console.error('Error fetching weather data:', error);
+  } catch (error: any) {
+    console.error('Error fetching weather data:', error.message);
     throw new Error('Failed to fetch weather data');
   }
 };
