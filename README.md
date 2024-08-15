@@ -92,3 +92,21 @@ The project follows a standard React and Next.js structure:
 The project uses React Context to manage the state of favorite cities across the application. This ensures that the list of favorite cities is easily accessible and manageable from any component.
 
 - **`FavoriteContext.tsx`**: This file contains the context provider and a custom hook for managing favorite cities. It uses `useState` to store and update the list of favorite cities, and provides functions to add and remove cities from this list.
+- 
+## How It Works
+
+### Debouncing
+
+- The search input field is monitored for changes.
+- Instead of sending a request on every keystroke, a debounced version of the input value is used.
+- Requests are only sent after the user pauses typing for the specified debounce delay.
+
+### Request Processing
+
+1. **User Input:** As the user types in the search input field, the input value is debounced to control the frequency of API requests.
+
+2. **API Call:** Once the debounce period passes without additional input, the application sends a request to the server-side API route.
+
+3. **Server-Side Fetch:** The server-side route (`/api/weather/route.ts`) handles the API request to fetch weather data from the OpenWeatherMap API using environment variables for security.
+
+4. **Response Handling:** The server responds with the weather data, which is then processed and displayed to the user.
