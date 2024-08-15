@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
+import { NextResponse } from 'next/server';
 
 const API_KEY = process.env.OPENWEATHER_MAP_API_KEY as string;
 const BASE_URL = process.env.BASE_URL as string;
@@ -19,14 +19,15 @@ interface WeatherData {
   };
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const { city } = req.query;
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  const city = url.searchParams.get('city');
 
   if (!city || typeof city !== 'string') {
-    return res.status(400).json({ error: 'City parameter is required' });
+    return NextResponse.json(
+      { error: 'City parameter is required' },
+      { status: 400 }
+    );
   }
 
   try {
@@ -38,14 +39,20 @@ export default async function handler(
       },
     });
 
-    res.status(200).json(response.data);
+    return NextResponse.json(response.data, { status: 200 });
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error('Error fetching weather data:', error.message);
-      res.status(500).json({ error: 'Failed to fetch weather data' });
+      return NextResponse.json(
+        { error: 'Failed to fetch weather data' },
+        { status: 500 }
+      );
     } else {
       console.error('Unexpected error:', error);
-      res.status(500).json({ error: 'Unexpected error occurred' });
+      return NextResponse.json(
+        { error: 'Unexpected error occurred' },
+        { status: 500 }
+      );
     }
   }
 }
